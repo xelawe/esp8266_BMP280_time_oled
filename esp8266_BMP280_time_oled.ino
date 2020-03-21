@@ -26,7 +26,7 @@
 //#include <cy_serdebug.h>
 #include <cy_serial.h>
 
-const char *gc_hostname = "espdhtoled";
+const char *gc_hostname = "espbmeoled";
 
 #include <Metro.h>
 
@@ -216,7 +216,7 @@ void loop() {
 
 void do_sensor() {
 
-  set_rgb(0, 255, 0);
+  set_rgb(0, 1024, 0);
 
   //get_dht22();
   get_bme280();
