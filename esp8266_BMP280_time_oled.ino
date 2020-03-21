@@ -23,25 +23,12 @@
    SOFTWARE.
 
 */
-//#include <FS.h>                   //this needs to be first, or it all crashes and burns...
-
-//#define serdebug
-//#ifdef serdebug
-//#define DebugPrint(...) {  Serial.print(__VA_ARGS__); }
-//#define DebugPrintln(...) {  Serial.println(__VA_ARGS__); }
-//#else
-//#define DebugPrint(...) { }
-//#define DebugPrintln(...) { }
-//#endif
-
 //#include <cy_serdebug.h>
 #include <cy_serial.h>
 
 const char *gc_hostname = "espdhtoled";
 
 #include <Metro.h>
-
-
 
 #define btnpin 4
 #define ledpinbl 13
@@ -73,8 +60,6 @@ static long startPress = 0;
 #include "weather.h"
 #include "ntptool.h"
 #include "oled_frames.h"
-//#include "tools_wifiman.h"
-
 
 
 Metro go_metro = Metro(30000);
@@ -115,20 +100,21 @@ void setup() {
 
   init_ota(gv_clientname);
 
-  //setup button 
+  //setup button
   pinMode(btnpin, INPUT);
   attachInterrupt(btnpin, IntBtn, CHANGE);
 
   init_time();
 
-init_bme280();
+  init_bme280();
   do_sensor();
 
   dis_stat_prog("done", 100);
 
   delay(500);
 
-  // The ESP is capable of rendering 60fps in 80Mhz mode
+  init_oled();
+    // The ESP is capable of rendering 60fps in 80Mhz mode
   // but that won't give you much time for anything else
   // run it in 160Mhz mode or just set it to 30 fps
   ui.setTargetFPS(60);

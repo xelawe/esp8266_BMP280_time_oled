@@ -12,7 +12,7 @@
 
 // Use the corresponding display class:
 // Initialize the OLED display using Wire library
-SSD1306  display(0x3c, D3, D4); //GPIO0, GPIO2 
+SSD1306  display(0x3c, D3, D4); //GPIO0, GPIO2
 
 OLEDDisplayUi ui ( &display );
 
@@ -22,7 +22,9 @@ int clockCenterX = screenW / 2;
 int clockCenterY = ((screenH - 16) / 2) + 16; // top yellow part is 16 px height
 int clockRadius = 23;
 
+void init_oled() {
 
+}
 
 // utility function for digital clock display: prints leading 0
 String twoDigits(int digits) {

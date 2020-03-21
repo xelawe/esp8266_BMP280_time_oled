@@ -1,4 +1,3 @@
-
 void digitalClockFrame(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y) {
   String timenow = String(hour()) + ":" + twoDigits(minute()) + ":" + twoDigits(second());
   display->setTextAlignment(TEXT_ALIGN_CENTER);
