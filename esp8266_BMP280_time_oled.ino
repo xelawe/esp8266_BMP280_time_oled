@@ -1,3 +1,26 @@
+/*
+Ersetzt durch Tasmota mit Oled
+Template:
+{"NAME":"time_oled","GPIO":[1,1,576,33,32,640,1,1,417,418,608,416,1,4768],"FLAG":0,"BASE":18}
+
+Displaymode 0
+DisplayRotate 2
+DisplayWidth 128
+DisplayHeight 64
+Poweronstate 0
+
+Rules:
+rule1 on System#Boot do displaytext [zs2x-10] %Mem1% [s2y25x-10] %Mem2% [s1ty50x0] [Ty50x45] endon
+      on Time#Minute do displaytext [zs2x-10] %Mem1% [s2y25x-10] %Mem2% [s1ty50x0] [Ty50x45] endon
+      on tele-BME280#Temperature do Mem1 %value% C endon  
+      on tele-BME280#Humidity do Mem2 %value% % endon
+      on ANALOG#Illuminance<1 do power2 off endon
+      on ANALOG#Illuminance>5 do power2 on endon
+rule1 1
+
+      
+*/
+
 /**
    The MIT License (MIT)
 
@@ -91,6 +114,9 @@ void setup() {
   // allocate memory to store 4 lines of text and 30 chars per line.
   display.setLogBuffer(4, 30);
 
+  dis_stat_prog(__FILE__, 0);
+  delay(3000);
+
   dis_stat_prog("Setup started", 0);
 
   //init_wifi();
@@ -114,7 +140,7 @@ void setup() {
   delay(500);
 
   init_oled();
-    // The ESP is capable of rendering 60fps in 80Mhz mode
+  // The ESP is capable of rendering 60fps in 80Mhz mode
   // but that won't give you much time for anything else
   // run it in 160Mhz mode or just set it to 30 fps
   ui.setTargetFPS(60);
@@ -218,7 +244,6 @@ void do_sensor() {
 
   set_rgb(0, 1024, 0);
 
-  //get_dht22();
   get_bme280();
 
   set_rgb(0, 0, 0);
@@ -243,5 +268,3 @@ void set_rgb(int iv_red, int iv_green, int iv_blue) {
   analogWrite(ledpingn, lv_green);
   analogWrite(ledpinbl, lv_blue);
 }
-
-
