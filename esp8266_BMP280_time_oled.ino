@@ -14,8 +14,8 @@ rule1 on System#Boot do displaytext [zs2x-10] %Mem1% [s2y25x-10] %Mem2% [s1ty50x
       on Time#Minute do displaytext [zs2x-10] %Mem1% [s2y25x-10] %Mem2% [s1ty50x0] [Ty50x45] endon
       on tele-BME280#Temperature do Mem1 %value% C endon  
       on tele-BME280#Humidity do Mem2 %value% % endon
-      on ANALOG#Illuminance<1 do power2 off endon
-      on ANALOG#Illuminance>5 do power2 on endon
+      on tele-ANALOG#Illuminance<1 do power2 off endon
+      on tele-ANALOG#Illuminance>0 do power2 on endon
 rule1 1
 
       
